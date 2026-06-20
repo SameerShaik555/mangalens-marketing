@@ -1,9 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { site, CHROME_STORE_URL } from '../../data/content';
+
+const pageTitle = `${site.name} vs Immersive Translate — Best Manga Translation Alternative`;
+const pageDescription = `Compare ${site.name} vs Immersive Translate for manga translation. Discover why manga readers choose MangaLens as the best Immersive Translate alternative — bubble-aware overlay, privacy-first, one-click translation on 1000+ manga sites.`;
+
+
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription}>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label={`${site.name} home`}>
