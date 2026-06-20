@@ -1,0 +1,184 @@
+---
+/**
+ * WaitlistForm — email lead capture.
+ *
+ * Backend: Netlify Forms by default (see WAITLIST in src/data/content.ts).
+ * The form is rendered statically so Netlify's build bot detects it and stores
+ * every submission (retrievable in the Netlify dashboard → Forms → "waitlist",
+ * CSV export, and the Netlify API). A honeypot field filters bots.
+ *
+ * Progressive enhancement: the form works without JS (native POST → Netlify's
+ * success page). With JS, submission is intercepted for inline success/error
+ * UX and client-side email validation. Disabling JS still captures the lead.
+ */
+import { WAITLIST } from '../data/content';
+
+const { provider, formName, action, eyebrow, headline, subhead, placeholder, button, consent } =
+  WAITLIST;
+
+// On Netlify, posting to the current page ('') is the documented default.
+const formAction = action || (provider === 'netlify' ? '/' : '');
+---
+
+<section id="waitlist" class="waitlist section">
+  <div class="container narrow center waitlist-inner">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2>{headline}</h2>
+    <p class="muted waitlist-sub">{subhead}</p>
+
+    <form
+      class="waitlist-form js-waitlist"
+      name={formName}
+      method="POST"
+      action={formAction}
+      data-provider={provider}
+      data-netlify={provider === 'netlify' ? 'true' : undefined}
+      netlify-honeypot={provider === 'netlify' ? 'bot-field' : undefined}
+      novalidate
+    >
+      {/* Netlify needs the form name echoed in the POST body. */}
+      <input type="hidden" name="form-name" value={formName} />
+      {/* Honeypot: humans never see/fill this; bots do and get dropped. */}
+      <p class="hp" aria-hidden="true">
+        <label>Don’t fill this out if you’re human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
+
+      <div class="waitlist-row">
+        <label class="visually-hidden" for="waitlist-email">Email address</label>
+        <input
+          id="waitlist-email"
+          class="waitlist-input"
+          type="email"
+          name="email"
+          inputmode="email"
+          autocomplete="email"
+          placeholder={placeholder}
+          required
+          aria-describedby="waitlist-msg waitlist-consent"
+        />
+        <button class="btn btn-primary js-waitlist-submit" type="submit">{button}</button>
+      </div>
+
+      <p id="waitlist-msg" class="waitlist-msg" role="status" aria-live="polite"></p>
+      <p id="waitlist-consent" class="waitlist-consent muted">{consent}</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  import { WAITLIST } from '../data/content';
+
+  // Pragmatic email check — mirrors the browser's native type=email rule
+  // closely enough for UX while the backend remains the source of truth.
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function enhance(form: HTMLFormElement) {
+    const input = form.querySelector<HTMLInputElement>('input[name="email"]');
+    const msg = form.querySelector<HTMLElement>('.waitlist-msg');
+    const submit = form.querySelector<HTMLButtonElement>('.js-waitlist-submit');
+    const honeypot = form.querySelector<HTMLInputElement>('input[name="bot-field"]');
+    if (!input || !msg || !submit) return;
+
+    const setMsg = (text: string, kind: 'error' | 'success' | '') => {
+      msg.textContent = text;
+      msg.dataset.kind = kind;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setMsg('', '');
+
+      const email = input.value.trim();
+      if (!EMAIL_RE.test(email)) {
+        setMsg(WAITLIST.invalidEmail, 'error');
+        input.focus();
+        return;
+      }
+      // Bot filled the honeypot — silently succeed without sending.
+      if (honeypot && honeypot.value) {
+        setMsg(WAITLIST.success, 'success');
+        form.reset();
+        return;
+      }
+
+      submit.disabled = true;
+      const original = submit.textContent;
+      submit.textContent = '…';
+
+      try {
+        const body = new URLSearchParams(new FormData(form) as any).toString();
+        const res = await fetch(form.getAttribute('action') || '/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        setMsg(WAITLIST.success, 'success');
+        form.reset();
+      } catch (err) {
+        setMsg(WAITLIST.error, 'error');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = original;
+      }
+    });
+  }
+
+  document
+    .querySelectorAll<HTMLFormElement>('form.js-waitlist')
+    .forEach((f) => enhance(f));
+</script>
+
+<style>
+  .waitlist {
+    background:
+      radial-gradient(70% 120% at 50% 0%, rgba(236, 72, 153, 0.14), transparent 70%);
+    border-top: 1px solid var(--border);
+  }
+  .waitlist-inner { max-width: 640px; }
+  .waitlist h2 { font-size: clamp(26px, 4.2vw, 40px); font-weight: 800; margin-bottom: 14px; }
+  .waitlist-sub { font-size: clamp(16px, 2.2vw, 19px); margin: 0 auto 28px; max-width: 540px; }
+
+  .waitlist-form { margin: 0 auto; }
+  .waitlist-row {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    max-width: 520px; margin: 0 auto;
+  }
+  .waitlist-input {
+    flex: 1 1 260px;
+    min-width: 0;
+    padding: 14px 18px;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .waitlist-input::placeholder { color: var(--muted); }
+  .waitlist-input:focus-visible {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--ring);
+  }
+  .waitlist-form .btn { flex: 0 0 auto; }
+
+  .waitlist-msg { min-height: 22px; margin: 14px 0 0; font-size: 14px; font-weight: 600; }
+  .waitlist-msg[data-kind='error'] { color: #fca5a5; }
+  .waitlist-msg[data-kind='success'] { color: #6ee7b7; }
+
+  .waitlist-consent { font-size: 13px; margin: 6px auto 0; max-width: 480px; line-height: 1.5; }
+
+  /* Honeypot + a11y-only label, visually removed but present for AT/bots. */
+  .hp { position: absolute; left: -5000px; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  @media (max-width: 480px) {
+    .waitlist-row { flex-direction: column; }
+    .waitlist-form .btn { width: 100%; }
+  }
+</style>

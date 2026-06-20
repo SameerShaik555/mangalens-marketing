@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import WaitlistForm from '../components/WaitlistForm.astro';
 import {
   hero,
   stats,
@@ -194,6 +195,9 @@ import {
       </div>
     </section>
 
+    <!-- ========================= WAITLIST ========================= -->
+    <WaitlistForm />
+
     <!-- ========================= FINAL CTA ========================= -->
     <section class="final-cta">
       <div class="container center">
@@ -218,6 +222,7 @@ import {
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
+        <a href="#waitlist">Waitlist</a>
         <a class="js-cta" data-cta="footer-discord" href={DISCORD_URL}>💬 Join Discord</a>
         <a class="js-cta" data-cta="footer-store" href={CHROME_STORE_URL}>Add to Chrome</a>
       </nav>

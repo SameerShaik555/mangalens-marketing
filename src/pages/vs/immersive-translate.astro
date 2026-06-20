@@ -1,0 +1,483 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { site, CHROME_STORE_URL } from '../../data/content';
+---
+
+<Layout>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label={`${site.name} home`}>
+        <span class="brand-mark">🔍</span>
+        <span class="brand-name">{site.name}</span>
+      </a>
+      <a class="btn btn-primary btn-sm js-cta" data-cta="header" href={CHROME_STORE_URL}>
+        Add to Chrome
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <span class="eyebrow">VS Comparison</span>
+        <h1 class="hero-title">
+          MangaLens vs Immersive Translate
+        </h1>
+        <p class="hero-sub muted">
+          Why manga readers choose MangaLens over Immersive Translate for translating raw manga
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary js-cta" data-cta="hero-primary" href={CHROME_STORE_URL}>
+            ⚡ Try MangaLens Free
+          </a>
+          <a class="btn btn-ghost" href="/">Learn more about MangaLens</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Summary -->
+    <section class="section section-alt">
+      <div class="container narrow">
+        <h2 class="comparison-headline">The key difference at a glance</h2>
+        <div class="summary-grid">
+          <div class="summary-card manga-card">
+            <div class="summary-icon">🔍</div>
+            <h3>MangaLens</h3>
+            <p class="muted">Purpose-built for manga readers with bubble-aware overlay technology</p>
+          </div>
+          <div class="vs-divider">VS</div>
+          <div class="summary-card immersive-card">
+            <div class="summary-icon">🌐</div>
+            <h3>Immersive Translate</h3>
+            <p class="muted">General-purpose translation tool with manga inpainting features</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Comparison Table -->
+    <section class="section">
+      <div class="container narrow">
+        <h2 class="comparison-headline">Feature comparison</h2>
+        <p class="muted comparison-sub">How MangaLens and Immersive Translate stack up for manga translation</p>
+
+        <div class="comparison-table">
+          <div class="comparison-header">
+            <div class="col-feature">Feature</div>
+            <div class="col-manga">MangaLens</div>
+            <div class="col-immersive">Immersive Translate</div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="col-feature">
+              <strong>Translation approach</strong>
+              <span class="muted">How text is translated</span>
+            </div>
+            <div class="col-manga manga-check">
+              <span class="check">✓</span> Bubble-aware overlay
+              <p class="muted">Preserves original art, overlays translation</p>
+            </div>
+            <div class="col-immersive immersive-check">
+              <span class="check">✓</span> Inpainting
+              <p class="muted">Erases text, reconstructs background</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="col-feature">
+              <strong>Specialization</strong>
+              <span class="muted">Tool focus and audience</span>
+            </div>
+            <div class="col-manga manga-check">
+              <span class="check">✓</span> Manga-specific
+              <p class="muted">Built exclusively for manga readers</p>
+            </div>
+            <div class="col-immersive">
+              <span class="cross">✗</span> General-purpose
+              <p class="muted">Does websites, PDFs, and manga</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="col-feature">
+              <strong>Workflow</strong>
+              <span class="muted">How you translate manga</span>
+            </div>
+            <div class="col-manga manga-check">
+              <span class="check">✓</span> One-click translation
+              <p class="muted">Click anywhere on manga page</p>
+            </div>
+            <div class="col-immersive">
+              <span class="cross">✗</span> Batch processing
+              <p class="muted">Requires upload or multiple steps</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="col-feature">
+              <strong>Extension weight</strong>
+              <span class="muted">Browser resource usage</span>
+            </div>
+            <div class="col-manga manga-check">
+              <span class="check">✓</span> Lightweight
+              <p class="muted">Minimal performance impact</p>
+            </div>
+            <div class="col-immersive">
+              <span class="cross">✗</span> Heavy extension
+              <p class="muted">Full-featured, resource-intensive</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="col-feature">
+              <strong>Privacy model</strong>
+              <span class="muted">How your data is handled</span>
+            </div>
+            <div class="col-manga manga-check">
+              <span class="check">✓</span> Privacy-first
+              <p class="muted">Minimal data collection, no sharing</p>
+            </div>
+            <div class="col-immersive">
+              <span class="cross">✗</span> Data sharing
+              <p class="muted">May share data with third parties</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="col-feature">
+              <strong>Manga site integration</strong>
+              <span class="muted">Works on manga reading sites</span>
+            </div>
+            <div class="col-manga manga-check">
+              <span class="check">✓</span> Native integration
+              <p class="muted">Works on 1000+ manga sites</p>
+            </div>
+            <div class="col-immersive">
+              <span class="cross">✗</span> Manual workflow
+              <p class="muted">Requires downloading/uploading</p>
+            </div>
+          </div>
+
+          <div class="comparison-row">
+            <div class="col-feature">
+              <strong>UX simplicity</strong>
+              <span class="muted">Ease of use for manga readers</span>
+            </div>
+            <div class="col-manga manga-check">
+              <span class="check">✓</span> Clean overlay UX
+              <p class="muted">Non-intrusive, preserves reading flow</p>
+            </div>
+            <div class="col-immersive">
+              <span class="cross">✗</span> Complex interface
+              <p class="muted">General-purpose UI, manga-specific controls</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why MangaLens -->
+    <section class="section section-alt">
+      <div class="container narrow">
+        <h2 class="comparison-headline">Why manga readers prefer MangaLens</h2>
+
+        <div class="reasons-grid">
+          <div class="reason-card">
+            <div class="reason-icon">🎯</div>
+            <h3>Built for manga, not everything</h3>
+            <p class="muted">
+              MangaLens is designed exclusively for manga readers. Every feature serves the manga reading workflow — from bubble detection to one-click translation on the sites you already use.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon">🎨</div>
+            <h3>Preserves the original art</h3>
+            <p class="muted">
+              Our bubble-aware overlay technology translates text without touching the artwork. No inpainting artifacts, no background reconstruction glitches — just clean translations over the original manga.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon">⚡</div>
+            <h3>One-click workflow</h3>
+            <p class="muted">
+              Click anywhere on a manga page and get instant translations. No downloads, no uploads, no batch processing dialogs. Just read and translate in the flow.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon">🔒</div>
+            <h3>Privacy-first approach</h3>
+            <p class="muted">
+              We don't build profiles on your reading habits. Minimal data collection, no third-party data sharing, and transparent privacy practices.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon">🪶</div>
+            <h3>Lightweight extension</h3>
+            <p class="muted">
+              MangaLens is focused and fast. No heavy features you'll never use. Just the tools manga readers need, with minimal impact on browser performance.
+            </p>
+          </div>
+
+          <div class="reason-card">
+            <div class="reason-icon">🌐</div>
+            <h3>Works where you read</h3>
+            <p class="muted">
+              Native integration with 1000+ manga sites. No need to leave your reading platform, download chapters, or upload images.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- When to use each -->
+    <section class="section">
+      <div class="container narrow">
+        <h2 class="comparison-headline">When to choose each tool</h2>
+
+        <div class="when-grid">
+          <div class="when-card manga-when">
+            <h3>Choose MangaLens if you...</h3>
+            <ul>
+              <li>Read manga directly on websites and want in-place translation</li>
+              <li>Prefer one-click convenience over batch processing</li>
+              <li>Value privacy and minimal data collection</li>
+              <li>Want a lightweight extension that doesn't slow your browser</li>
+              <li>Read on manga platforms and want seamless integration</li>
+              <li>Prefer overlay translation that preserves original artwork</li>
+            </ul>
+          </div>
+
+          <div class="when-card immersive-when">
+            <h3>Choose Immersive Translate if you...</h3>
+            <ul>
+              <li>Need to translate downloaded manga files offline</li>
+              <li>Prefer inpainting and background reconstruction over overlay</li>
+              <li>Want batch processing for multiple manga chapters</li>
+              <li>Translate non-manga content (websites, PDFs, documents)</li>
+              <li>Need a general-purpose tool for multiple translation tasks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="container center">
+        <h2>Try MangaLens free — built for manga readers</h2>
+        <p class="muted">Join thousands of manga readers who switched from Immersive Translate to MangaLens</p>
+        <a class="btn btn-primary btn-lg js-cta" data-cta="final" href={CHROME_STORE_URL}>
+          ⚡ Add to Chrome — It's Free
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark">🔍</span>
+        <span class="brand-name">{site.name}</span>
+        <p class="muted footer-tag">{site.tagline}</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/">Back to home</a>
+        <a class="js-cta" data-cta="footer-store" href={CHROME_STORE_URL}>Add to Chrome</a>
+      </nav>
+    </div>
+    <div class="container footer-legal muted">
+      © {new Date().getFullYear()} {site.name}. All rights reserved.
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(11, 11, 18, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; height: 66px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 18px; }
+  .brand-mark { font-size: 20px; }
+  .btn-sm { padding: 9px 18px; font-size: 14px; }
+
+  /* Hero */
+  .hero { position: relative; padding: 80px 0 64px; overflow: hidden; }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(60% 50% at 50% 0%, rgba(124, 58, 237, 0.25), transparent 70%),
+      radial-gradient(40% 40% at 80% 10%, rgba(236, 72, 153, 0.18), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; text-align: center; max-width: 820px; margin: 0 auto; }
+  .hero-title { font-size: clamp(40px, 7vw, 72px); font-weight: 900; margin-bottom: 22px; }
+  .hero-sub { font-size: clamp(17px, 2.4vw, 21px); margin: 0 auto 32px; max-width: 620px; }
+  .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* Section styling */
+  .section { padding: 64px 0; }
+  .section-alt { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .narrow { max-width: 900px; }
+  .center { text-align: center; }
+
+  /* Comparison headline */
+  .comparison-headline { font-size: clamp(28px, 4.4vw, 42px); font-weight: 800; margin-bottom: 16px; text-align: center; }
+  .comparison-sub { text-align: center; margin-bottom: 40px; font-size: 17px; }
+
+  /* Summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin: 40px 0;
+  }
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+  }
+  .manga-card { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand), 0 20px 50px rgba(124,58,237,0.25); }
+  .summary-icon { font-size: 40px; margin-bottom: 16px; }
+  .summary-card h3 { font-size: 24px; margin-bottom: 12px; }
+  .vs-divider {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--brand);
+    text-align: center;
+  }
+
+  /* Comparison table */
+  .comparison-table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .comparison-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    padding: 20px 24px;
+    gap: 20px;
+  }
+  .col-feature { display: flex; flex-direction: column; gap: 4px; }
+  .col-manga { color: var(--brand-2); }
+  .col-immersive { color: #6b7280; }
+
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .comparison-row:last-child { border-bottom: none; }
+  .col-feature strong { display: block; font-size: 17px; margin-bottom: 4px; }
+  .col-feature span { font-size: 14px; }
+
+  .manga-check { color: var(--brand-2); }
+  .immersive-check { color: #6b7280; }
+  .check { color: #10b981; font-weight: 700; margin-right: 6px; }
+  .cross { color: #ef4444; font-weight: 700; margin-right: 6px; }
+  .col-manga p, .col-immersive p { font-size: 14px; margin: 8px 0 0 0; }
+
+  /* Reasons grid */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .reason-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .reason-icon { font-size: 32px; margin-bottom: 16px; }
+  .reason-card h3 { font-size: 20px; margin-bottom: 12px; }
+  .reason-card p { font-size: 16px; line-height: 1.6; }
+
+  /* When grid */
+  .when-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .when-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+  }
+  .when-card h3 { font-size: 20px; margin-bottom: 20px; }
+  .when-card ul { list-style: none; padding: 0; margin: 0; }
+  .when-card li {
+    padding: 12px 0 12px 28px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--border);
+  }
+  .when-card li:last-child { border-bottom: none; }
+  .when-card li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--brand-2);
+  }
+
+  /* Final CTA */
+  .final-cta { padding: 92px 0; text-align: center; background:
+      radial-gradient(60% 120% at 50% 0%, rgba(124, 58, 237, 0.22), transparent 70%); }
+  .final-cta h2 { font-size: clamp(30px, 5vw, 48px); font-weight: 900; margin-bottom: 14px; }
+  .final-cta p { margin-bottom: 30px; font-size: 17px; }
+  .btn-lg { padding: 18px 36px; font-size: 18px; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 48px 0 32px; background: var(--bg-soft); }
+  .footer-inner { display: flex; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+  .footer-brand { display: flex; align-items: center; gap: 8px; font-weight: 800; flex-wrap: wrap; }
+  .footer-tag { width: 100%; font-weight: 400; font-size: 14px; margin: 6px 0 0; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; color: var(--muted); font-weight: 500; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-legal { margin-top: 28px; font-size: 13px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .summary-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .vs-divider { transform: rotate(90deg); }
+    .comparison-header, .comparison-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .comparison-header { padding: 16px; }
+    .comparison-row { padding: 16px; }
+    .reasons-grid, .when-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

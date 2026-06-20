@@ -168,3 +168,42 @@ export const finalCta = {
   subhead: 'Add MangaLens to Chrome and translate your first 200 bubbles free.',
   cta: { label: 'Add to Chrome — Free', href: CHROME_STORE_URL },
 };
+
+/**
+ * Lead capture / email waitlist.
+ *
+ * Capture backend: Netlify Forms (zero-backend, no secrets in repo). On deploy,
+ * Netlify detects the statically-rendered form named `WAITLIST.formName` and
+ * stores every submission. Leads are retrievable in the Netlify dashboard
+ * (Forms → "waitlist"), exportable as CSV, and reachable via the Netlify API.
+ *
+ * Swapping providers (e.g. an ESP like Buttondown/ConvertKit/Mailchimp) is a
+ * one-line change: set `action` to the provider's POST endpoint and flip
+ * `provider`. The progressive-enhancement script posts URL-encoded form data,
+ * which every major ESP form endpoint accepts.
+ *
+ * Double opt-in: Netlify Forms is single opt-in. The consent line below records
+ * explicit consent at submission time (sufficient for a waitlist). When a
+ * marketing ESP is connected, enable that ESP's double opt-in so a confirmation
+ * email is sent before any campaign — see docs/lead-capture.md.
+ */
+export const WAITLIST = {
+  /** 'netlify' uses Netlify Forms. 'endpoint' posts to a custom `action` URL (ESP). */
+  provider: 'netlify' as 'netlify' | 'endpoint',
+  /** Netlify form name (also the dashboard label). Keep stable once live. */
+  formName: 'waitlist',
+  /** POST target. Empty string posts to the current page (Netlify default). */
+  action: '',
+  eyebrow: 'Join the waitlist',
+  headline: 'Be first to know what we ship next',
+  subhead:
+    'Get early access to new features, supported sites, and language launches. No spam — just the occasional product update.',
+  placeholder: 'you@example.com',
+  button: 'Notify me',
+  consent:
+    'By joining, you agree to receive occasional product emails from MangaLens. We never share your email, and you can unsubscribe anytime.',
+  success: "You're on the list! Check your inbox for a confirmation soon.",
+  // Surfaced when the network/submit fails; copy stays friendly and actionable.
+  error: 'Something went wrong. Please try again in a moment.',
+  invalidEmail: 'Please enter a valid email address.',
+};

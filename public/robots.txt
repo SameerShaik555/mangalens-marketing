@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mangalens.app/sitemap.xml
+Sitemap: https://get.mangalens.app/sitemap.xml
